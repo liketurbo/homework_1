@@ -80,7 +80,7 @@ body {
 }
 
 .door_disabled {
-    opacity: .7;
+    opacity: .5
 }
 
 .door_level_0 {
@@ -153,6 +153,7 @@ body {
 
 .popup__content_level_1 {
     /* Можно поставить какую-нибудь свою картинку двери на бек */
+    background: #000 url(../img/level_1/ground_01.png) repeat;
 }
 
 .popup__content_level_2 {
@@ -183,4 +184,90 @@ body {
 
 .door-riddle__button_pressed {
     background-color: #F3E5D9;
+}
+
+.door-riddle-blocks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    top: 64px;
+
+    height: calc(100% - 64px);
+    max-height: 700px;
+}
+
+.door-riddle-blocks__text {
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    margin: 20px
+}
+
+.door-riddle-blocks__block {
+    display: block;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+}
+
+.door-riddle-blocks__block_top-left {
+    top: 0;
+    left: 0;
+}
+.door-riddle-blocks__block_top-right {
+    top: 0;
+    right: 0;
+}
+.door-riddle-blocks__block_bottom-left {
+    bottom: 0;
+    left: 0;
+}
+.door-riddle-blocks__block_bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.door-riddle-blocks__block_0-0 {
+    background-image: url(../img/level_1/crate_27.png);
+}
+.door-riddle-blocks__block_0-1 {
+    background-image: url(../img/level_1/crate_28.png);
+}
+.door-riddle-blocks__block_0-2 {
+    background-image: url(../img/level_1/crate_30.png);
+}
+.door-riddle-blocks__block_0-3 {
+    background-image: url(../img/level_1/crate_31.png);
+}
+
+.door-riddle-blocks__drag-blocks {
+    width: 128px;
+    height: 128px;
+    position: relative;
+}
+
+.door-riddle-blocks__block_drag {
+    user-select: none;
+    cursor: pointer;
+}
+
+.door-riddle-blocks__block_pressed {
+    opacity: .7;
+    z-index: 1;
+}
+
+.door-riddle-blocks__block_1-0 {
+    background-image: url(../img/level_1/crate_42.png);
+}
+.door-riddle-blocks__block_1-1 {
+    background-image: url(../img/level_1/crate_43.png);
+}
+.door-riddle-blocks__block_1-2 {
+    background-image: url(../img/level_1/crate_45.png);
+}
+.door-riddle-blocks__block_1-3 {
+    background-image: url(../img/level_1/crate_01.png);
 }

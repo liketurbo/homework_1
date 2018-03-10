@@ -64,9 +64,121 @@ function Door1(number, onUnlock) {
 
     // ==== Напишите свой код для открытия второй двери здесь ====
     // Для примера дверь откроется просто по клику на неё
-    this.popup.addEventListener('click', function() {
-        this.unlock();
+
+    var targetBlocks = [
+        this.popup.querySelector('.door-riddle-blocks__block_0-0'),
+        this.popup.querySelector('.door-riddle-blocks__block_0-1'),
+        this.popup.querySelector('.door-riddle-blocks__block_0-2'),
+        this.popup.querySelector('.door-riddle-blocks__block_0-3')
+    ];
+
+    var dragBlocks = [
+        this.popup.querySelector('.door-riddle-blocks__block_1-0'),
+        this.popup.querySelector('.door-riddle-blocks__block_1-1'),
+        this.popup.querySelector('.door-riddle-blocks__block_1-2'),
+        this.popup.querySelector('.door-riddle-blocks__block_1-3')
+    ];
+
+    dragBlocks.forEach(function(b) {
+        b.addEventListener('pointerdown', _onDragBlocksPointerDown.bind(this));
+        b.addEventListener('pointerup', _onDragBlocksPointerUp.bind(this));
+        b.addEventListener('pointermove', _onDragBlocksPointerMove.bind(this));
+        b.addEventListener('pointercancel', _onDragBlocksPointerUp.bind(this));
     }.bind(this));
+
+    function _onDragBlocksPointerMove(e) {
+        if (tappedButtons === 0) return false;
+        moveDragBlock(e, _getId(e));
+    }
+
+    var tappedButtons = 0;
+    var prevOffset = [
+        [0, 0],
+        [64, 0],
+        [0, 64],
+        [64, 64]
+    ];
+    function moveDragBlock(e, id) {
+        prevOffset[id][0] += e.offsetX - e.target.getBoundingClientRect().width / 2;
+        prevOffset[id][1] += e.offsetY - e.target.getBoundingClientRect().height / 2;
+
+        e.target.style.left = prevOffset[id][0] + 'px';
+        e.target.style.top = prevOffset[id][1] + 'px';
+    }
+
+    function checkCondition(e, that) {
+        if (tappedButtons <= 1) return false;
+        switch (_getId(e)) {
+            case '0': case '1':
+                if (_inArea(0) && _inArea(1)) {
+                    _removeElem(0);
+                    _removeElem(1);
+                }
+            case '2': case '3':
+                if (_inArea(2) && _inArea(3)) {
+                    _removeElem(2);
+                    _removeElem(3);
+                }
+            case '0': case '2':
+                if (_inArea(0) && _inArea(2)) {
+                    _removeElem(0);
+                    _removeElem(2);
+                }
+            case '1': case '3':
+                if (_inArea(0) && _inArea(2)) {
+                    _removeElem(0);
+                    _removeElem(2);
+                }
+        }
+
+        var count = document.querySelector('.door-riddle-blocks__drag-blocks').children.length;
+        if (count === 0) that.unlock();
+    }
+
+    function _onDragBlocksPointerDown(e) {
+        e.target.classList.add('door-riddle-blocks__block_pressed');
+        tappedButtons++;
+    }
+
+    function _onDragBlocksPointerUp(e) {
+        e.target.classList.remove('door-riddle-blocks__block_pressed');
+        checkCondition(e, this);
+        tappedButtons--;
+    }
+
+    function _getId(e) {
+        return e.target.classList[2].slice(-1);
+    }
+
+    function _removeElem(id) {
+        switch (id) {
+            case 0:
+                dragBlocks[0].parentNode.removeChild(dragBlocks[0]);
+                break;
+            case 1:
+                dragBlocks[1].parentNode.removeChild(dragBlocks[1]);
+                break;
+            case 2:
+                dragBlocks[2].parentNode.removeChild(dragBlocks[2]);
+                break;
+            case 3:
+                dragBlocks[3].parentNode.removeChild(dragBlocks[3]);
+                break;
+        }
+    }
+
+    function _inArea(id) {
+        var targetPosX = targetBlocks[id].getBoundingClientRect().x;
+        var dragPosX = dragBlocks[id].getBoundingClientRect().x;
+        var targetPosY = targetBlocks[id].getBoundingClientRect().y;
+        var dragPosY = dragBlocks[id].getBoundingClientRect().y;
+        var width = dragBlocks[id].getBoundingClientRect().width;
+        var height = dragBlocks[id].getBoundingClientRect().height;
+        var diffX = Math.abs(targetPosX - dragPosX);
+        var diffY = Math.abs(targetPosY - dragPosY);
+
+        return (diffX <= (width / 2) && diffY <= (height / 2));
+    }
     // ==== END Напишите свой код для открытия второй двери здесь ====
 }
 Door1.prototype = Object.create(DoorBase.prototype);
