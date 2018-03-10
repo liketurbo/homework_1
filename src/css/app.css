@@ -153,11 +153,12 @@ body {
 
 .popup__content_level_1 {
     /* Можно поставить какую-нибудь свою картинку двери на бек */
-    background: #000 url(../img/level_1/ground_01.png) repeat;
+    background: #000 url(../img/level_2/slice27_27.png) repeat;
 }
 
 .popup__content_level_2 {
     /* Можно поставить какую-нибудь свою картинку двери на бек */
+    background: #000 url(../img/level_1/ground_01.png) repeat;
 }
 .popup__content_level_3 {
     background-image: url(../img/door__box.png);
@@ -169,6 +170,14 @@ body {
     align-items: center;
     justify-content: space-around;
     height: 100%;
+}
+
+.door-riddle__text {
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    margin: 20px
 }
 
 .door-riddle__button {
@@ -196,14 +205,6 @@ body {
 
     height: calc(100% - 64px);
     max-height: 700px;
-}
-
-.door-riddle-blocks__text {
-    position: absolute;
-    text-transform: uppercase;
-    color: white;
-    font-weight: bold;
-    margin: 20px
 }
 
 .door-riddle-blocks__block {
@@ -270,4 +271,84 @@ body {
 }
 .door-riddle-blocks__block_1-3 {
     background-image: url(../img/level_1/crate_01.png);
+}
+
+.door-riddle-anim {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    top: 70px;
+
+    height: calc(100% - 70px);
+    max-height: 700px;
+}
+
+.door-riddle-anim__grid {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    grid-gap: 25px;
+}
+
+.door-riddle-anim__block {
+    width: 70px;
+    height: 70px;
+    background-size: 70px 70px;
+    cursor: pointer;
+}
+
+.door-riddle-anim__block_0 {
+    background-image: url(../img/level_2/chick.png);
+}
+
+.door-riddle-anim__block_1 {
+    background-image: url(../img/level_2/duck.png);
+}
+
+.door-riddle-anim__block_2 {
+    background-image: url(../img/level_2/frog.png);
+}
+
+.door-riddle-anim__block_3 {
+    background-image: url(../img/level_2/gorilla.png);
+}
+
+.door-riddle-anim__block_4 {
+    background-image: url(../img/level_2/narwhal.png);
+}
+
+.door-riddle-anim__block_5 {
+    background-image: url(../img/level_2/parrot.png);
+}
+
+.door-riddle-anim__block_6 {
+    background-image: url(../img/level_2/sloth.png);
+}
+
+.door-riddle-anim__block_7 {
+    background-image: url(../img/level_2/snake.png);
+}
+
+.door-riddle-anim__block_8 {
+    background-image: url(../img/level_2/walrus.png);
+}
+
+.door-riddle-anim__block_pressed {
+    transform: scale(.7);
+}
+
+.door-riddle-anim__tip {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.door-riddle-anim__tip > span {
+    display: block;
+    font-size: 16px;
+    color: white;
+    line-height: 1.1;
 }
