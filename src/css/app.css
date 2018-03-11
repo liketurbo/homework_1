@@ -153,12 +153,12 @@ body {
 
 .popup__content_level_1 {
     /* Можно поставить какую-нибудь свою картинку двери на бек */
-    background: #000 url(../img/level_2/slice27_27.png) repeat;
+    background: #000 url(../img/level_1/ground_01.png) repeat;
 }
 
 .popup__content_level_2 {
     /* Можно поставить какую-нибудь свою картинку двери на бек */
-    background: #000 url(../img/level_1/ground_01.png) repeat;
+    background: #000 url(../img/level_2/slice27_27.png) repeat;
 }
 .popup__content_level_3 {
     background-image: url(../img/door__box.png);
@@ -351,4 +351,167 @@ body {
     font-size: 16px;
     color: white;
     line-height: 1.1;
+}
+
+.door-riddle-final {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    position: relative;
+    top: 70px;
+
+    height: calc(100% - 50px);
+    max-height: 700px;
+}
+
+.door-riddle-final__block {
+    width: 250px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, .5);
+    position: relative;
+    border: 1px solid black;
+    margin-top: 25px;
+}
+
+.door-riddle-final__strip {
+    position: absolute;
+    height: 1px;
+    width: 250px;
+    background-color: black;
+}
+
+.door-riddle-final__strip_upper {
+    left: 0;
+    top: 50px;
+}
+
+.door-riddle-final__strip_lower {
+    left: 0;
+    top: 100px;
+}
+
+.viewport {
+    position: absolute;
+    width: 50px;
+    height: 150px;
+}
+
+.viewport_0 {
+    left: 0;
+}
+
+.viewport_1 {
+    left: 100px;
+}
+
+.viewport_2 {
+    left: 200px
+}
+
+
+.viewport__slide-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+}
+
+.viewport__numbers {
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 50px;
+    height: 500px;
+}
+
+.viewport__slide-block_0 {
+    background-image: url('../img/level_3/text_0.png');
+}
+
+.viewport__slide-block_1 {
+    background-image: url('../img/level_3/text_1.png');
+}
+
+.viewport__slide-block_2 {
+    background-image: url('../img/level_3/text_2.png');
+}
+
+.viewport__slide-block_3 {
+    background-image: url('../img/level_3/text_3.png');
+}
+
+.viewport__slide-block_4 {
+    background-image: url('../img/level_3/text_4.png');
+}
+
+.viewport__slide-block_5 {
+    background-image: url('../img/level_3/text_5.png');
+}
+
+.viewport__slide-block_6 {
+    background-image: url('../img/level_3/text_6.png');
+}
+
+.viewport__slide-block_7 {
+    background-image: url('../img/level_3/text_7.png');
+}
+
+.viewport__slide-block_8 {
+    background-image: url('../img/level_3/text_8.png');
+}
+
+.viewport__slide-block_9 {
+    background-image: url('../img/level_3/text_9.png');
+}
+
+.plus-sign {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50px;
+    background-image: url('../img/level_3/text_plus.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.plus-sign_0 {
+    left: 50px;
+}
+
+.plus-sign_1 {
+    left: 150px;
+}
+
+.door-riddle-final__task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 150px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, .8);
+    color: white;
+    border: 1px solid white;
+    z-index: 1;
+}
+
+.door-riddle-final__task > span {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    line-height: 1.4;
+    user-select: none;
+    pointer-events: none;
 }

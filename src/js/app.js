@@ -12,7 +12,6 @@ function App(el) {
         ];
 
     this.doors = doors;
-
     /**
      * Callback вызывается в коде двери
      * Тут даем возможность открыть следующие двери
@@ -33,34 +32,5 @@ function App(el) {
         }
     };
 }
-
-function simulateTouch(element, eventType) {
-    var touchObj = new Touch({
-        identifier: Date.now(),
-        target: element,
-        clientX: 0,
-        clientY: 0,
-        radiusX: 2.5,
-        radiusY: 2.5,
-        rotationAngle: 10,
-        force: 0.5,
-    });
-
-    var touchEvent = new TouchEvent(eventType, {
-        cancelable: true,
-        bubbles: true,
-        touches: [touchObj],
-        targetTouches: [],
-        changedTouches: [touchObj],
-        shiftKey: true,
-    });
-
-    element.dispatchEvent(touchEvent);
-}
-
 // Start the app
 var app = new App(document.querySelector('.app'));
-
-// Door0
-simulateTouch(document.querySelector('.door-riddle__button_0'), 'pointerdown');
-simulateTouch(document.querySelector('.door-riddle__button_1'), 'pointerdown');

@@ -64,72 +64,6 @@ function Door1(number, onUnlock) {
 
     // ==== Напишите свой код для открытия второй двери здесь ====
     // Для примера дверь откроется просто по клику на неё
-    var animals = [
-        this.popup.querySelector('.door-riddle-anim__block_0'),
-        this.popup.querySelector('.door-riddle-anim__block_1'),
-        this.popup.querySelector('.door-riddle-anim__block_2'),
-        this.popup.querySelector('.door-riddle-anim__block_3'),
-        this.popup.querySelector('.door-riddle-anim__block_4'),
-        this.popup.querySelector('.door-riddle-anim__block_5'),
-        this.popup.querySelector('.door-riddle-anim__block_6'),
-        this.popup.querySelector('.door-riddle-anim__block_7'),
-        this.popup.querySelector('.door-riddle-anim__block_8')
-    ];
-
-    animals.forEach(function(el) {
-        el.addEventListener('pointerdown', _onButtonPointerDown.bind(this));
-    }.bind(this));
-
-    function _onButtonPointerDown(e) {
-        e.target.classList.add('door-riddle-anim__block_pressed');
-        currentSequence.push(_getId(e));
-        checkCondition(this);
-    }
-
-    var rightSequence = ['2', '1', '0', '3'];
-    var currentSequence = [];
-    function checkCondition(that) {
-        if (currentSequence.length === 4) {
-            if (_compareArrays(rightSequence, currentSequence)) {
-                that.unlock()
-            } else {
-                resetLevel();
-            }
-        }
-    }
-
-    function resetLevel() {
-        currentSequence = [];
-        animals.forEach(function(el) {
-            el.classList.remove('door-riddle-anim__block_pressed');
-        });
-    }
-
-    function _getId(e) {
-        return e.target.classList[1].slice(-1);
-    }
-
-    function _compareArrays(firstArr, secondArr) {
-        return firstArr.length == secondArr.length &&
-               firstArr.every(function(el, ind) { return el === secondArr[ind]});
-    }
-    // ==== END Напишите свой код для открытия второй двери здесь ====
-}
-Door1.prototype = Object.create(DoorBase.prototype);
-Door1.prototype.constructor = DoorBase;
-
-/**
- * @class Door2
- * @augments DoorBase
- * @param {Number} number
- * @param {Function} onUnlock
- */
-function Door2(number, onUnlock) {
-    DoorBase.apply(this, arguments);
-
-    // ==== Напишите свой код для открытия третей двери здесь ====
-    // Для примера дверь откроется просто по клику на неё
-
     var targetBlocks = [
         this.popup.querySelector('.door-riddle-blocks__block_0-0'),
         this.popup.querySelector('.door-riddle-blocks__block_0-1'),
@@ -254,6 +188,72 @@ function Door2(number, onUnlock) {
 
         return (diffX <= (width / 2) && diffY <= (height / 2));
     }
+    // ==== END Напишите свой код для открытия второй двери здесь ====
+}
+Door1.prototype = Object.create(DoorBase.prototype);
+Door1.prototype.constructor = DoorBase;
+
+/**
+ * @class Door2
+ * @augments DoorBase
+ * @param {Number} number
+ * @param {Function} onUnlock
+ */
+function Door2(number, onUnlock) {
+    DoorBase.apply(this, arguments);
+
+    // ==== Напишите свой код для открытия третей двери здесь ====
+    // Для примера дверь откроется просто по клику на неё
+
+    var animals = [
+        this.popup.querySelector('.door-riddle-anim__block_0'),
+        this.popup.querySelector('.door-riddle-anim__block_1'),
+        this.popup.querySelector('.door-riddle-anim__block_2'),
+        this.popup.querySelector('.door-riddle-anim__block_3'),
+        this.popup.querySelector('.door-riddle-anim__block_4'),
+        this.popup.querySelector('.door-riddle-anim__block_5'),
+        this.popup.querySelector('.door-riddle-anim__block_6'),
+        this.popup.querySelector('.door-riddle-anim__block_7'),
+        this.popup.querySelector('.door-riddle-anim__block_8')
+    ];
+
+    animals.forEach(function(el) {
+        el.addEventListener('pointerdown', _onButtonPointerDown.bind(this));
+    }.bind(this));
+
+    function _onButtonPointerDown(e) {
+        e.target.classList.add('door-riddle-anim__block_pressed');
+        currentSequence.push(_getId(e));
+        checkCondition(this);
+    }
+
+    var rightSequence = ['2', '1', '0', '3'];
+    var currentSequence = [];
+    function checkCondition(that) {
+        if (currentSequence.length === 4) {
+            if (_compareArrays(rightSequence, currentSequence)) {
+                that.unlock()
+            } else {
+                resetLevel();
+            }
+        }
+    }
+
+    function resetLevel() {
+        currentSequence = [];
+        animals.forEach(function(el) {
+            el.classList.remove('door-riddle-anim__block_pressed');
+        });
+    }
+
+    function _getId(e) {
+        return e.target.classList[1].slice(-1);
+    }
+
+    function _compareArrays(firstArr, secondArr) {
+        return firstArr.length == secondArr.length &&
+        firstArr.every(function(el, ind) { return el === secondArr[ind]});
+    }
     // ==== END Напишите свой код для открытия третей двери здесь ====
 }
 Door2.prototype = Object.create(DoorBase.prototype);
@@ -271,9 +271,142 @@ function Box(number, onUnlock) {
 
     // ==== Напишите свой код для открытия сундука здесь ====
     // Для примера сундук откроется просто по клику на него
-    this.popup.addEventListener('click', function() {
-        this.unlock();
+    function createNumbers(viewport) {
+        for (var i = 0; i <= 9; i++) {
+            var parent = document.querySelector(".viewport__numbers_" + viewport);
+            var div = document.createElement('div');
+            div.classList.add('viewport__slide-block');
+            div.classList.add('viewport__slide-block_' + i);
+            div.style.top = (50 * i) + 'px';
+            parent.append(div);
+        }
+    }
+
+    createNumbers(0);
+    createNumbers(1);
+    createNumbers(2);
+
+    var viewports = [
+        document.querySelector('.viewport__numbers_0'),
+        document.querySelector('.viewport__numbers_1'),
+        document.querySelector('.viewport__numbers_2')
+    ];
+
+    viewports.forEach(function(el) {
+        el.addEventListener('pointerdown', _onDragBlocksPointerDown.bind(this));
+        el.addEventListener('pointerup', _onDragBlocksPointerUp.bind(this));
+        el.addEventListener('pointermove', _onDragBlocksPointerMove.bind(this));
+        el.addEventListener('pointercancel', _onDragBlocksPointerUp.bind(this));
     }.bind(this));
+
+    var initialOffset = [0, 0, 0];
+    var prevOffset = [0, 0, 0];
+    var isTapped = false;
+    var rightAnswer = [
+        [0, 0, 1],
+        [0, 0, 1],
+        [0, 0, 1]
+    ];
+    var current = [
+        [0, 0, 1],
+        [0, 0, 1],
+        [0, 0, 1]
+    ];
+
+    generateTask();
+    renderTask();
+
+    function _getId(e) {
+        return e.target.classList[1].slice(-1);
+    }
+
+    function _onDragBlocksPointerDown(e) {
+        isTapped = true;
+        initialOffset[_getId(e)] = e.offsetY;
+    }
+
+    function _onDragBlocksPointerMove(e) {
+        if (isTapped) {
+            prevOffset[_getId(e)] += e.offsetY - initialOffset[_getId(e)];
+
+            if (prevOffset[_getId(e)] > 0) prevOffset[_getId(e)] = 0;
+            if (prevOffset[_getId(e)] < -450) prevOffset[_getId(e)] = -450;
+
+            if (isTapped) e.target.style.top = 50 + prevOffset[_getId(e)] + 'px';
+        }
+    }
+
+    function _onDragBlocksPointerUp(e) {
+        isTapped = false;
+        var comp = prevOffset[_getId(e)] % 50;
+
+        if (comp !== 0) {
+            if (comp >= -25) {
+                prevOffset[_getId(e)] += -(comp);
+                e.target.style.top = 50 + prevOffset[_getId(e)] + 'px';
+            } else {
+                var newComp = 50 + comp;
+                prevOffset[_getId(e)] += -(newComp);
+                e.target.style.top = 50 + prevOffset[_getId(e)] + 'px';
+            }
+        }
+
+        current[_getId(e)] = refreshValues(_getId(e));
+        checkCondition(this);
+    }
+
+    function refreshValues(id) {
+        var input = parseInt(viewports[id].style.top);
+        if (input === 50) {
+            return [0, 0, 1];
+        } else if (input === 0) {
+            return [0, 1, 2];
+        } else if (input === -400) {
+            return [8, 9, 0];
+        } else {
+            var comp = input / -50;
+            return [0 + comp, 1 + comp, 2 + comp];
+        }
+    }
+
+    function checkCondition(that) {
+        var currentValue = current[0][0] + current[0][1] + current[0][2] +
+        current[1][0] + current[1][1] + current[1][2] +
+        current[2][0] + current[2][1] + current[2][2];
+
+        var rightValue = rightAnswer[0][0] + rightAnswer[0][1] + rightAnswer[0][2] +
+        rightAnswer[1][0] + rightAnswer[1][1] + rightAnswer[1][2] +
+        rightAnswer[2][0] + rightAnswer[2][1] + rightAnswer[2][2];
+
+        if (currentValue === rightValue) that.unlock();
+    }
+
+    function generateTask() {
+        var pattern = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+        for (var i = 0; i < viewports.length; i++) {
+            var randomNum = _getRandomInt(0, 9);
+            rightAnswer[i][0] = pattern[randomNum]
+            rightAnswer[i][1] = pattern[randomNum + 1];
+            rightAnswer[i][2] = pattern[randomNum + 2];
+        }
+    }
+
+    function renderTask() {
+        var spans = [
+            document.querySelector('.door-riddle-final__task > span:nth-child(1)'),
+            document.querySelector('.door-riddle-final__task > span:nth-child(2)'),
+            document.querySelector('.door-riddle-final__task > span:nth-child(3)')
+        ];
+
+        spans[0].innerHTML = rightAnswer[0][0] + rightAnswer[1][0] + rightAnswer[2][0];
+        spans[1].innerHTML = rightAnswer[0][1] + rightAnswer[1][1] + rightAnswer[2][1];
+        spans[2].innerHTML = rightAnswer[0][2] + rightAnswer[1][2] + rightAnswer[2][2];
+    }
+
+    function _getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     // ==== END Напишите свой код для открытия сундука здесь ====
 
     this.showCongratulations = function() {
