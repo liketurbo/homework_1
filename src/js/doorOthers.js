@@ -370,15 +370,24 @@ function Box(number, onUnlock) {
     }
 
     function checkCondition(that) {
-        var currentValue = current[0][0] + current[0][1] + current[0][2] +
-        current[1][0] + current[1][1] + current[1][2] +
-        current[2][0] + current[2][1] + current[2][2];
+        var isCorrectAnswer = true;
 
-        var rightValue = rightAnswer[0][0] + rightAnswer[0][1] + rightAnswer[0][2] +
-        rightAnswer[1][0] + rightAnswer[1][1] + rightAnswer[1][2] +
-        rightAnswer[2][0] + rightAnswer[2][1] + rightAnswer[2][2];
+        for (var i = 0; i < 3; i++) {
+          var currentValueRow = 0;
+          var rightAnswerRow = 0;
 
-        if (currentValue === rightValue) that.unlock();
+          for (var j = 0; j < 3; j++) {
+            currentValueRow += current[j][i];
+            rightAnswerRow += rightAnswer[j][i];
+          }
+
+          if (currentValueRow !== rightAnswerRow) {
+            isCorrectAnswer = false;
+            break;
+          }
+        }
+
+        if (isCorrectAnswer) that.unlock();
     }
 
     function generateTask() {
